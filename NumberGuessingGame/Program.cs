@@ -8,10 +8,11 @@ namespace NumberGuessingGame
         {
             int integerFromUser;
             bool success;
+
             do
             {
                 Console.WriteLine(question);
-                string userResponse = Console.ReadLine();
+                string userResponse = Console.ReadLine(); // "66" to 66
                 success = int.TryParse(userResponse, out integerFromUser);
             } while (success == false);
 
@@ -23,20 +24,21 @@ namespace NumberGuessingGame
         {
             Console.WriteLine("Let's play a guessing game!  The higher your score, the worse you did!");
 
-            int max = GetIntegerFromUser("What max range would you like?");
+            int maxRange = GetIntegerFromUser("What max range would you like?");
 
-            Random rnd = new Random();
+            Random random = new Random();
 
-            int secretNumber = rnd.Next(1, max + 1);
+            int secretNumber = random.Next(1, maxRange + 1);
 
-            int score = 0;
+            int score = 0; 
             int guess;
 
+                        
             do
             {
                 Console.ResetColor();
                 Console.WriteLine("Your current score is " + score);
-                guess = GetIntegerFromUser("Please guess a number between 1-" + max + ":");
+                guess = GetIntegerFromUser($"Please guess a number between 1- {maxRange}:");
 
                 if (guess > secretNumber)
                 {
@@ -44,7 +46,7 @@ namespace NumberGuessingGame
                     Console.WriteLine("You were too high, loser!");
                     score += 1;
                 }
-                else if (guess < secretNumber)
+                if (guess < secretNumber)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You were too low, loser");
